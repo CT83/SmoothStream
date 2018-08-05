@@ -10,7 +10,7 @@ Until I stumbled upon [this](https://stackoverflow.com/questions/43817161/how-to
 
 I decided it was 'bout time someone did something about it.
 This repo is a minimal example of Streaming Video smoothly over the network.
-It currently has a dependency on
+It currently has a dependency on ZeroMQ and I don't see a way around it. PRs are always welcome.
 
 
 ### Prerequisites

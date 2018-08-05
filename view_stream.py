@@ -3,9 +3,11 @@ import zmq
 import base64
 import numpy as np
 
+from constants import PORT
+
 context = zmq.Context()
 footage_socket = context.socket(zmq.SUB)
-footage_socket.bind('tcp://*:5555')
+footage_socket.bind('tcp://*:'+PORT)
 footage_socket.setsockopt_string(zmq.SUBSCRIBE, np.unicode(''))
 
 while True:

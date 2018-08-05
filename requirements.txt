@@ -1,0 +1,3 @@
+numpy==1.15.0
+opencv-python==3.4.2.17
+pyzmq==17.1.0

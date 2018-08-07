@@ -3,6 +3,7 @@ Webcam and PiCamera Streaming over the Network with Python
 
 
 ## Getting Started
+SmoothStream is a Python Application which makes streaming video from webcams over the network a breeze.
 
 Streaming images from your Webcam over the network should be easy, right?
 
@@ -10,9 +11,12 @@ Nope. After pulling my hair out, searching on the internet for weeks, scavenging
 Until I stumbled upon [this](https://stackoverflow.com/questions/43817161/how-to-send-opencv-video-footage-over-zeromq-sockets) StackOverflow Question.
 
 I decided it was 'bout time someone did something about it.
-It currently has a dependency on ZeroMQ and I don't see a way around it.
 
-PRs are always welcome.
+The `StreamViewer` needs to start listening for incoming stream from the `Streamer`, once an incoming stream is detected it is displayed on the screen.
+
+SmoothStream currently has a dependency on ZeroMQ and I don't see a way around it.
+
+So, PRs are always welcome.
 
 
 ### Prerequisites

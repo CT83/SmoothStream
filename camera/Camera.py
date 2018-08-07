@@ -48,6 +48,12 @@ class Camera:
         del self.camera
         return camera_capture
 
+    def __del__(self):
+        try:
+            self.current_frame.release()
+        except AttributeError:
+            pass
+
 
 if __name__ == '__main__':
     # Capture and Display Image

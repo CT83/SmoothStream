@@ -14,16 +14,19 @@ class StreamViewer:
         self.footage_socket = context.socket(zmq.SUB)
         self.footage_socket.bind('tcp://*:' + port)
         self.footage_socket.setsockopt_string(zmq.SUBSCRIBE, np.unicode(''))
+        self.current_frame = None
 
-    def start_listening_for_incoming_stream(self):
+    def start_listening_for_incoming_stream(self, display=True):
         while self.footage_socket:
             try:
                 frame = self.footage_socket.recv_string()
                 img = base64.b64decode(frame)
                 npimg = np.fromstring(img, dtype=np.uint8)
-                source = cv2.imdecode(npimg, 1)
-                cv2.imshow("Stream", source)
-                cv2.waitKey(1)
+                self.current_frame = cv2.imdecode(npimg, 1)
+
+                if display:
+                    cv2.imshow("Stream", self.current_frame)
+                    cv2.waitKey(1)
 
             except KeyboardInterrupt:
                 cv2.destroyAllWindows()

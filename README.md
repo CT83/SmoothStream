@@ -1,4 +1,4 @@
-# SmoothStream
+# SmoothStream [![Build Status](https://travis-ci.com/CT83/SmoothStream.svg?branch=master)](https://travis-ci.com/CT83/SmoothStream)
 Webcam and PiCamera Streaming over the Network with Python
 
 

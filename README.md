@@ -5,11 +5,11 @@ Webcam and PiCamera Streaming over the Network with Python
 ## Getting Started
 
 Streaming images from your Webcam over the network should be easy, right?
-Nope. After pulling my hair out, searching on the internet for weeks, scavenging through old forum posts and digging through old StackOverflow questions, I came up empty handed. (Most of the code examples were outdated and worked only in Python 2)
+
+Nope. After pulling my hair out, searching on the internet for weeks, scavenging through old forum posts and digging through old StackOverflow questions, I came up empty-handed. (Most of the code examples were outdated and worked only in Python 2)
 Until I stumbled upon [this](https://stackoverflow.com/questions/43817161/how-to-send-opencv-video-footage-over-zeromq-sockets) StackOverflow Question.
 
 I decided it was 'bout time someone did something about it.
-This repo is a minimal example of Streaming Video smoothly over the network.
 It currently has a dependency on ZeroMQ and I don't see a way around it.
 
 PRs are always welcome.
@@ -29,22 +29,32 @@ A step by step series of examples that tell you how to get a development env run
 pip install -r requirements.txt
 ```
 
+2. Start the viewer, on the server.
+```
+python StreamViewer.py
+```
 
-End with an example of getting some data out of the system or using it for a little demo
+3. On another machine connected to the same network, start the streamer, and enter the IP of the machine running the StreamViewer.
+```
+python Streamer.py -s 192.168.1.X
+```
+
+You will see the video being streamed across the network to your Viewer.
 
 ## Running the tests
-
-Explain how to run the automated tests for this system
+```
+python -m unittest discover .
+```
 
 ### Break down into end to end tests
 
-Explain what these tests test and why
+`test_camera.py` - Tests if camera can be detected with OpenCV
 
 ```
-Give an example
+python -m unittest camera.test_camera
 ```
 
-### What other alternatives did I try?
+### Alternative from around the internet which failed to work.
 http://answers.opencv.org/question/19055/video-over-the-network/
 https://github.com/yushuhuang/webcam
 https://stackoverflow.com/questions/30988033/sending-live-video-frame-over-network-in-python-opencv
@@ -54,19 +64,13 @@ https://stackoverflow.com/questions/36265183/how-to-get-video-frame-by-frame-fro
 https://stackoverflow.com/questions/29099839/opencv-stream-from-a-camera-connected-to-a-remote-machine
 https://raspberrypi.stackexchange.com/questions/72308/how-to-stream-video-via-socket-using-opencv-and-picamera
 
-```
-Give an example
-```
 
-## Deployment
-
-Add additional notes about how to deploy this on a live system
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+**[OpenCV](http://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_setup/py_intro/py_intro.html)** - a library of programming functions mainly aimed at real-time computer vision.
+**[ZeroMQ](http://zeromq.org/bindings:python)** - a high-performance asynchronous messaging library, aimed at use in distributed or concurrent applications.
+
 
 ## Contributing
 
@@ -78,17 +82,9 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Rohan Sawant** [PurpleBooth](https://github.com/PurpleBooth)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
 ## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+This project is licensed under the GPL-3.0 License - see the [LICENSE.md](LICENSE.md) file for details
 

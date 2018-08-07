@@ -1,4 +1,3 @@
-import base64
 import sys
 
 import cv2
@@ -6,6 +5,7 @@ import zmq
 
 from camera.Camera import Camera
 from constants import PORT, SERVER_ADDRESS
+from utils import image_to_string
 
 
 class Streamer:
@@ -16,10 +16,6 @@ class Streamer:
         self.footage_socket = context.socket(zmq.PUB)
         self.footage_socket.connect('tcp://' + server_address + ':' + port)
 
-    def _image_to_string(self, image):
-        encoded, buffer = cv2.imencode('.jpg', image)
-        return base64.b64encode(buffer)
-
     def start(self):
         print("Streaming Started...")
         camera = Camera()
@@ -28,7 +24,7 @@ class Streamer:
         while self.footage_socket:
             try:
                 frame = camera.current_frame.read()  # grab the current frame
-                image_as_string = self._image_to_string(frame)
+                image_as_string = image_to_string(frame)
                 self.footage_socket.send(image_as_string)
 
             except KeyboardInterrupt:

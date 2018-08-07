@@ -10,16 +10,14 @@ Until I stumbled upon [this](https://stackoverflow.com/questions/43817161/how-to
 
 I decided it was 'bout time someone did something about it.
 This repo is a minimal example of Streaming Video smoothly over the network.
-It currently has a dependency on ZeroMQ and I don't see a way around it. PRs are always welcome.
+It currently has a dependency on ZeroMQ and I don't see a way around it.
+
+PRs are always welcome.
 
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
-
-```
-Give examples
-```
+1. Webcam (duh!)
 
 ### Installing
 
@@ -31,11 +29,6 @@ A step by step series of examples that tell you how to get a development env run
 pip install -r requirements.txt
 ```
 
-And repeat
-
-```
-until finished
-```
 
 End with an example of getting some data out of the system or using it for a little demo
 

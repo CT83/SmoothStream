@@ -45,20 +45,23 @@ python Streamer.py -s 192.168.1.X
 
 You will see the video being streamed across the network to your Viewer.
 
-## Running the tests
+## Running the tests (WebCam Needed)
 ```
 python -m unittest discover .
 ```
 
-### Break down into end to end tests
+1. `test_camera.py` - Tests if camera can be detected with OpenCV
 
-`test_camera.py` - Tests if camera can be detected with OpenCV
+    `python -m unittest camera.test_camera`
 
-```
-python -m unittest camera.test_camera
-```
+2. `test_local_streaming.py` - Tests Streaming and Viewing silently locally
 
-### Alternative from around the internet which failed to work.
+    `python -m unittest test_local_streaming`
+
+
+
+
+### Alternatives from around the internet which failed to work.
 http://answers.opencv.org/question/19055/video-over-the-network/
 https://github.com/yushuhuang/webcam
 https://stackoverflow.com/questions/30988033/sending-live-video-frame-over-network-in-python-opencv

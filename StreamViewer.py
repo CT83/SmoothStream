@@ -6,23 +6,33 @@ import numpy as np
 import zmq
 
 from constants import PORT
+from utils import string_to_image
 
 
 class StreamViewer:
     def __init__(self, port=PORT):
+        """
+        Binds the computer to a ip address and starts listening for incoming streams.
+
+        :param port: Port which is used for streaming
+        """
         context = zmq.Context()
         self.footage_socket = context.socket(zmq.SUB)
         self.footage_socket.bind('tcp://*:' + port)
         self.footage_socket.setsockopt_string(zmq.SUBSCRIBE, np.unicode(''))
         self.current_frame = None
 
-    def start_listening_for_incoming_stream(self, display=True):
+    def receive_stream(self, display=True):
+        """
+        Displays displayed stream in a window if no arguments are passed.
+        Keeps updating the 'current_frame' attribute with the most recent frame, this can be accessed using 'self.current_frame'
+        :param display: boolean, If False no stream output will be displayed.
+        :return: None
+        """
         while self.footage_socket:
             try:
                 frame = self.footage_socket.recv_string()
-                img = base64.b64decode(frame)
-                npimg = np.fromstring(img, dtype=np.uint8)
-                self.current_frame = cv2.imdecode(npimg, 1)
+                self.current_frame = string_to_image(frame)
 
                 if display:
                     cv2.imshow("Stream", self.current_frame)
@@ -46,7 +56,7 @@ def main():
         port = args.port
 
     stream_viewer = StreamViewer(port)
-    stream_viewer.start_listening_for_incoming_stream()
+    stream_viewer.receive_stream()
 
 
 if __name__ == '__main__':

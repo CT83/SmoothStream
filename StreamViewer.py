@@ -1,11 +1,11 @@
+import argparse
 import base64
-import sys
 
 import cv2
 import numpy as np
 import zmq
 
-from constants import PORT, SERVER_ADDRESS
+from constants import PORT
 
 
 class StreamViewer:
@@ -32,17 +32,15 @@ class StreamViewer:
 
 def main():
     port = PORT
-    server_address = SERVER_ADDRESS
 
-    try:
-        if len(sys.argv) > 1:
-            program_name = sys.argv[0]
-            arguments = sys.argv[1:]
-            count = len(arguments)
-            server_address = arguments[0]
-            port = arguments[1]
-    except IndexError as ie:
-        print("Loading default Server Address and Port.")
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-p', '--port',
+                        help='The port which you want the Streaming Viewer to use, default'
+                             ' is ' + PORT, required=False)
+
+    args = parser.parse_args()
+    if args.port:
+        port = args.port
 
     stream_viewer = StreamViewer(port)
     stream_viewer.start_listening_for_incoming_stream()

@@ -22,6 +22,7 @@ class Streamer:
         context = zmq.Context()
         self.footage_socket = context.socket(zmq.PUB)
         self.footage_socket.connect('tcp://' + server_address + ':' + port)
+        self.keep_running = True
 
     def start(self):
         """
@@ -32,8 +33,9 @@ class Streamer:
         print("Streaming Started...")
         camera = Camera()
         camera.start_capture()
+        self.keep_running = True
 
-        while self.footage_socket:
+        while self.footage_socket and self.keep_running:
             try:
                 frame = camera.current_frame.read()  # grab the current frame
                 image_as_string = image_to_string(frame)
@@ -42,6 +44,15 @@ class Streamer:
             except KeyboardInterrupt:
                 cv2.destroyAllWindows()
                 break
+        print("Streaming Stopped!")
+        cv2.destroyAllWindows()
+
+    def stop(self):
+        """
+        Sets 'keep_running' to False to stop the running loop if running.
+        :return: None
+        """
+        self.keep_running = False
 
 
 def main():

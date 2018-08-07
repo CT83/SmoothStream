@@ -1,5 +1,4 @@
 import argparse
-import base64
 
 import cv2
 import numpy as np
@@ -21,6 +20,7 @@ class StreamViewer:
         self.footage_socket.bind('tcp://*:' + port)
         self.footage_socket.setsockopt_string(zmq.SUBSCRIBE, np.unicode(''))
         self.current_frame = None
+        self.keep_running = True
 
     def receive_stream(self, display=True):
         """
@@ -29,7 +29,8 @@ class StreamViewer:
         :param display: boolean, If False no stream output will be displayed.
         :return: None
         """
-        while self.footage_socket:
+        self.keep_running = True
+        while self.footage_socket and self.keep_running:
             try:
                 frame = self.footage_socket.recv_string()
                 self.current_frame = string_to_image(frame)
@@ -41,7 +42,14 @@ class StreamViewer:
             except KeyboardInterrupt:
                 cv2.destroyAllWindows()
                 break
+        print("Streaming Stopped!")
 
+    def stop(self):
+        """
+        Sets 'keep_running' to False to stop the running loop if running.
+        :return: None
+        """
+        self.keep_running = False
 
 def main():
     port = PORT

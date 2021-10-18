@@ -75,7 +75,7 @@ https://raspberrypi.stackexchange.com/questions/72308/how-to-stream-video-via-so
 
 ## Built With
 
-* **[OpenCV](http://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_setup/py_intro/py_intro.html)** - a library of programming functions mainly aimed at real-time computer vision.
+* **[OpenCV](https://docs.opencv.org/master/d6/d00/tutorial_py_root.html)** - a library of programming functions mainly aimed at real-time computer vision.
 * **[ZeroMQ](http://zeromq.org/bindings:python)** - a high-performance asynchronous messaging library, aimed at use in distributed or concurrent applications.
 
 
